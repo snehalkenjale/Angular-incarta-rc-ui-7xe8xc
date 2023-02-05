@@ -1,26 +1,28 @@
-<label for="dob-dd">Date of joining </label>
-<select id="dob-dd">
-  <option value="1">1</option>
-</select>
-<select class="dob-mmm">
-  <option>{{month}}</option>
-</select>
-<select class="dob-yyyy">
-  <option *ngIf="year">{{year[2]}}</option>
-</select>
-<br />
-<label for="role">Role: </label>
-<select id="role">
-  <option>CEO</option>
-  <optgroup>Director</optgroup>
-  <option>Manager</option>
-  <option>Developer</option>
-</select>
-<br />
-<label for="yoe">Experience</label>
-<input type="radio" name="" id="" />0-3 <input type="radio" name="" id="" />3-5
-<input type="radio" name="" id="" />5-10
-<input type="radio" name="" id="" />10-15
-<input type="radio" name="" id="" />15-20
-<input type="radio" name="" id="" />20-25
-<input type="radio" name="" id="" />25-30
+<div class="container-fluid">
+  <div class="row">
+    <div class="col-12">
+      <label for="dob-dd">Date of joining </label>
+      <app-dropdown [options]="days"></app-dropdown>
+      <app-dropdown
+        [options]="months"
+        (changeDropdown)="onMonthChange($event)"
+      ></app-dropdown>
+      <app-dropdown [options]="years"></app-dropdown>
+    </div>
+  </div>
+  <br />
+  <div class="row">
+    <div class="col-6">
+      <label for="role">Role: </label>
+      <app-dropdown
+        [selectedValue]="experience"
+        [options]="roles"
+        (changeDropdown)="onRoleChange($event)"
+      ></app-dropdown>
+    </div>
+    <div class="col-6">
+      <label for="yoe">Experience</label>
+      <input type="range" min="1" max="25" [value]="experience" />
+    </div>
+  </div>
+</div>
